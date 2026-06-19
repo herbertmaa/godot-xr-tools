@@ -222,7 +222,7 @@ func _get(property: StringName) -> Variant:
 	return null
 
 
-func _set(property: StringName, value: Variant):
+func _set(property: StringName, value: Variant) -> bool:
 	if scene_properties_keys.has(property):
 
 		# Special handling is required for NodePaths, as they are relative to the scene
@@ -256,7 +256,7 @@ func _property_can_revert(property : StringName) -> bool:
 
 
 # Provide revert values for custom properties
-func _property_get_revert(property : StringName): # Variant
+func _property_get_revert(property : StringName) -> Variant:
 	match property:
 		"alpha_scissor_threshold":
 			return 0.25
@@ -264,6 +264,7 @@ func _property_get_revert(property : StringName): # Variant
 			return false
 		"filter":
 			return true
+	return null
 
 
 # When the scene_node changes, update the property list
